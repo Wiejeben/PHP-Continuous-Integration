@@ -27,10 +27,6 @@ node {
 	}
 
 	stage('Deploy') {
-		// TODO
-	}
-
-	stage('Clean') {
-		deleteDir()
+		sh 'mv ./* /srv/users/serverpilot/apps/project'
 	}
 }
