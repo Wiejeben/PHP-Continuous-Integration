@@ -8,6 +8,8 @@ node {
 	}
 
 	stage('Test') {
+		sh 'cp .env.testing .env'
+
 		try {
 			sh 'phpunit --log-junit reports/phpunit/results.xml'
 		} finally {
