@@ -4,7 +4,13 @@ node {
 	}
 
 	stage('Test') {
-		sh 'phpunit --log-junit reports/phpunit/results.xml'
+		try {
+			sh 'phpunit --log-junit reports/phpunit/results.xml'
+		} catch(err) {
+			junit 'reports/**/*.xml'
+			throw err
+		}
+
 		junit 'reports/**/*.xml'
 	}
 }
