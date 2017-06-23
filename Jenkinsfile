@@ -26,9 +26,12 @@ node {
 	}
 
 	stage('Frontend') {
-		sh 'npm install'
-		sh 'npm rebuild node-sass' // fix bug with node-sass vendor folder
-		sh 'npm run production'
+		try {
+			sh 'npm install' // apparently returns an error (not visible) - continue regardless
+		} finally {
+			sh 'npm rebuild node-sass' // fix bug with node-sass vendor folder
+			sh 'npm run production'
+		}
 	}
 
 	stage('Deploy') {
