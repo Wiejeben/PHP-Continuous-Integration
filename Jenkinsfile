@@ -1,4 +1,8 @@
 node {
+	stage('Clean') {
+		deleteDir()
+	}
+
 	stage('Checkout') {
 		git branch: 'master', url: 'https://github.com/Wiejeben/PHP-Continuous-Integration/'
 	}
