@@ -5,10 +5,11 @@
 		 convertWarningsToExceptions="true"
 		 processIsolation="false"
 		 stopOnFailure="false"
-		 syntaxCheck="true">
+		 syntaxCheck="true"
+		 bootstrap="src/Email.php">
 	<testsuites>
 		<testsuite name="Test suite">
-			<directory>.</directory>
+			<directory>tests/</directory>
 		</testsuite>
 	</testsuites>
 
