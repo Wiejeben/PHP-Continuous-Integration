@@ -4,7 +4,10 @@ node {
 	}
 
 	stage('Test') {
-		junit 'reports/**/*.xml'
-		sh 'phpunit --log-junit reports/phpunit/results.xml'
+		try {
+			sh 'phpunit --log-junit reports/phpunit/results.xml'
+		} finally {
+			junit 'reports/**/*.xml'
+		}
 	}
 }
