@@ -7,5 +7,6 @@ node {
 		steps {
 			sh 'phpunit --log-junit reports/phpunit/results.xml'
 			junit 'reports/**/*.xml'
+		}
 	}
 }
