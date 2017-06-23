@@ -1,1 +1,3 @@
-`phpunit --bootstrap src/Email.php tests/EmailTest`
+To execute, just run `phpunit`.
+
+Requires PHP 7.1
