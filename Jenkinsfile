@@ -16,4 +16,9 @@ node {
 			junit 'reports/**/*.xml'
 		}
 	}
+
+	stage('Frontend') {
+		sh 'npm install'
+		sh 'npm run production'
+	}
 }
