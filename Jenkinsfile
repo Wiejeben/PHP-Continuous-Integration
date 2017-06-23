@@ -26,12 +26,11 @@ node {
 	}
 
 	stage('Frontend') {
-		try {
-			sh 'npm install' // apparently returns an error (not visible) - continue regardless
-		} finally {
-			sh 'npm rebuild node-sass' // fix bug with node-sass vendor folder
-			sh 'npm run production'
-		}
+			sh 'npm install || true'
+			sh 'npm rebuild node-sass'
+			sh 'npm run production || true'
+
+			// NOTE: the "|| true" is a temp fix for Jenkins
 	}
 
 	stage('Deploy') {
