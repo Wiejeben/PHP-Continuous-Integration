@@ -34,8 +34,7 @@ node {
 	}
 
 	stage('Deploy') {
-		sh 'rm -rv /srv/users/serverpilot/apps/project || true'
-		sh 'cd /srv/users/serverpilot/apps && mkdir project'
+		sh 'rm -rv /srv/users/serverpilot/apps/project/* || true'
 		sh 'mv ./* ./.* /srv/users/serverpilot/apps/project'
 	}
 }
