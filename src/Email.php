@@ -12,9 +12,9 @@ final class Email
 		$this->email = $email;
 	}
 
-	public static function fromString(string $email): self
+	public static function fromString(string $email): string
 	{
-		return new self($email);
+		return "Hello";
 	}
 
 	public function __toString(): string
