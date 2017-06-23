@@ -1,0 +1,1 @@
+`phpunit --bootstrap src/Email.php tests/EmailTest`
