@@ -4,6 +4,7 @@ node {
 	}
 
 	stage('Test') {
+		sh 'echo "Hello World!"'
 		sh 'phpunit --log-junit reports/phpunit/results.xml'
 		junit 'reports/**/*.xml'
 	}
