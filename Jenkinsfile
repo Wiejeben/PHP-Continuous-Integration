@@ -4,7 +4,7 @@ node {
 	}
 
 	stage('PHP Lint') {
-		sh 'find . -name "*.php" -print0 | xargs -0 -n1 php -l'
+		sh 'find . -path ./vendor -prune -o -name "*.php" -print0 | xargs -0 -n1 php -l'
 	}
 
 	stage('Composer') {
