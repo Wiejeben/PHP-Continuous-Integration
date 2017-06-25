@@ -1,8 +1,4 @@
 node {
-	stage('Clean') {
-		deleteDir()
-	}
-
 	stage('Checkout') {
 		git branch: 'master', url: 'https://github.com/Wiejeben/PHP-Continuous-Integration/'
 	}
@@ -26,15 +22,24 @@ node {
 	}
 
 	stage('Frontend') {
-			sh 'npm install || true'
-			sh 'npm rebuild node-sass'
-			sh 'npm run production || true'
-
-			// NOTE: the "|| true" is a temp fix for Jenkins
+		sh 'npm install || true'
+		sh 'npm rebuild node-sass'
+		sh 'npm run production || true'
 	}
 
 	stage('Deploy') {
-		sh 'rm -rv /srv/users/serverpilot/apps/project/* || true'
-		sh 'mv ./* ./.* /srv/users/serverpilot/apps/project'
+		def livedir = '/srv/users/serverpilot/apps/project/'
+
+		dir(livedir) {
+			git branch: 'master', url: 'https://github.com/Wiejeben/PHP-Continuous-Integration/'
+		}
+
+		sh "rm -r ${livedir}node_modules && rm -r ${livedir}vendor"
+		sh "cp -r ./vendor ${livedir} && cp -r ./node_modules ${livedir}"
+
+		dir(livedir) {
+			sh "npm run production"
+			sh "php artisan clear-compiled && php artisan optimize && php artisan cache:clear"
+		}
 	}
 }
