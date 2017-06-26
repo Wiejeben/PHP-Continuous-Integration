@@ -20,5 +20,5 @@ Route::get('/test', function () {
 });
 
 Route::post('/test', function (\Illuminate\Http\Request $request) {
-    return json_encode($request->all());
+    return response()->json($request->all());
 });
