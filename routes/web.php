@@ -20,5 +20,17 @@ Route::get('/test', function () {
 });
 
 Route::post('/test', function (\Illuminate\Http\Request $request) {
+
+    $record = new \App\Record();
+
+    $record->mac = $request->input('mac_address');
+    $record->ip_lan = $request->input('lan_ip');
+    $record->ip_wan = $request->ip();
+
+    $record->long = 0.0;
+    $record->lat = 0.0;
+
+    $record->save();
+
     return response()->json($request->all());
 });
