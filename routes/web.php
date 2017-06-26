@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/blank', function () {
+    return view('blank', ['ip' => $_SERVER['REMOTE_ADDR']]);
+});
