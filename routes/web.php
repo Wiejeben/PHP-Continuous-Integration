@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/blank', function () {
+Route::get('/test', function () {
     return view('blank', ['ip' => $_SERVER['REMOTE_ADDR']]);
+});
+
+Route::post('/test', function (\Illuminate\Http\Request $request) {
+    return json_encode($request->all());
 });
