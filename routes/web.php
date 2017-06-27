@@ -27,8 +27,8 @@ Route::post('/test', function (\Illuminate\Http\Request $request) {
     $record->ip_lan = $request->input('lan_ip');
     $record->ip_wan = $request->ip();
 
-    $record->long = 0.0;
-    $record->lat = 0.0;
+    $record->long = $request->input('gps_latitude');
+    $record->lat = $request->input('gps_longitude');;
 
     $record->save();
 
