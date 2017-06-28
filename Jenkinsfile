@@ -16,20 +16,15 @@ node {
 
 		try {
 			sh 'vendor/bin/phpunit --log-junit reports/phpunit/results.xml'
-		} catch (err) {
-			junit 'reports/**/*.xml'
-			throw err
 		} finally {
 			junit 'reports/**/*.xml'
 		}
-
-		// TODO: Catch err
 	}
 
 	stage('Frontend') {
-		sh 'npm install || true'
+		sh 'npm install'
 		sh 'npm rebuild node-sass'
-		sh 'npm run production || true'
+		sh 'npm run production'
 	}
 
 	stage('Deploy') {
@@ -37,14 +32,14 @@ node {
 
 		dir(livedir) {
 			git branch: 'master', url: 'https://github.com/Wiejeben/PHP-Continuous-Integration/'
-			sh "rm -r ./node_modules && rm -r ./vendor"
 		}
 
+		sh "rm -r ${livedir}node_modules && rm -r ${livedir}vendor"
 		sh "cp -r ./vendor ${livedir} && cp -r ./node_modules ${livedir}"
 
 		dir(livedir) {
-			sh "npm run production"
 			sh "php artisan clear-compiled && php artisan optimize && php artisan cache:clear"
+			sh "npm run production"
 		}
 	}
 }

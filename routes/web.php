@@ -26,9 +26,9 @@ Route::post('/test', function (\Illuminate\Http\Request $request) {
     $record->mac = $request->input('mac_address');
     $record->ip_lan = $request->input('lan_ip');
     $record->ip_wan = $request->ip();
-
-    $record->long = $request->input('gps_latitude');
-    $record->lat = $request->input('gps_longitude');;
+    
+    $record->lat = ($request->input('gps_latitude') == 'nan') ? 0.0 : $request->input('gps_latitude');
+    $record->long = ($request->input('gps_longitude') == 'nan') ? 0.0 : $request->input('gps_longitude');
 
     $record->save();
 
